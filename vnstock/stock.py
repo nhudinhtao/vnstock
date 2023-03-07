@@ -68,7 +68,7 @@ def stock_historical_data (symbol, resolution, start_date, end_date):
     """ 
     fd = int(time.mktime(time.strptime(start_date, "%Y-%m-%d")))
     td = int(time.mktime(time.strptime(end_date, "%Y-%m-%d")))
-    data = requests.get('https://apipubaws.tcbs.com.vn/stock-insight/v1/stock/bars-long-term?ticker={}&type=stock&resolution={}}&from={}&to={}'.format(symbol, resolution, fd, td)).json()
+    data = requests.get('https://apipubaws.tcbs.com.vn/stock-insight/v1/stock/bars-long-term?ticker={}&type=stock&resolution={}&from={}&to={}'.format(symbol, resolution, fd, td)).json()
     df = json_normalize(data['data'])
     df['tradingDate'] = pd.to_datetime(df.tradingDate.str.split("T", expand=True)[0])
     df.columns = df.columns.str.title()
